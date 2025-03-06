@@ -47,6 +47,7 @@ services:
       - DB_NAME=catalog
     volumes:
       - ./backend:/app/backend
+      - /app/backend/node_modules
     networks:
       - backend_network
 
