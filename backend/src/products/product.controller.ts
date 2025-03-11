@@ -1,26 +1,35 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Delete,
+  Param,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.entity';
+import { CreateProductDto } from './dto/create-product.dto';
 
-@Controller('products') // Define the API route for products
+@Controller('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  // Handle GET requests to retrieve all products
   @Get()
-  getAll() {
+  async getAll(): Promise<Product[]> {
     return this.productService.findAll();
   }
 
-  // Handle POST requests to create a new product
   @Post()
-  create(@Body() productData: Partial<Product>) {
+  async create(@Body() productData: CreateProductDto): Promise<Product> {
     return this.productService.create(productData);
   }
 
-  // Handle DELETE requests to remove a product by ID
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productService.delete(id);
+  async remove(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<{ message: string }> {
+    await this.productService.delete(id);
+    return { message: 'Product deleted successfully' };
   }
 }

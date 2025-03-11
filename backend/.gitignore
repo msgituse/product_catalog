@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# TypeScript build output
+dist/
+build/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and editor folders
+.vscode/
+.idea/
+
+# TypeScript config files
+tsconfig.tsbuildinfo
+
+# NestJS CLI generated files
+*.js
+*.d.ts
+
+# Coverage directory used by testing tools
+coverage/
+
+# Tye config files
+.tye/
+
+# Next.js and other front-end frameworks (if applicable)
+.next/
+
+# Yarn lock file (optional, depending on your package manager preference)
+yarn.lock
+
+# npm lock file (only one lock file should be committed)
+package-lock.json
