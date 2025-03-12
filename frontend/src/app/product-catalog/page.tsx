@@ -29,9 +29,6 @@ export default function ProductCatalog() {
           <RefreshCw size={18} />
           Retry
         </button>
-        <Link href="/add-product" className="mt-2 text-green-500 hover:underline">
-          Or add a new product
-        </Link>
       </div>
     );
   }
