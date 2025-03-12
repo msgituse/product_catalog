@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import { ProductItemProps } from '@/types/types';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ProductItem: React.FC<ProductItemProps> = ({ product, handleDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const confirmDelete = () => {
     if (product?.id) {
       handleDelete(product.id);
+      toast.success(`${product.name} has been deleted.`);
       setIsModalOpen(false);
     } else {
       console.error("Error: Product ID is missing.");

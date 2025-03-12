@@ -6,7 +6,7 @@ import ProductList from '@/components/ProductList';
 import Pagination from '@/components/Pagination';
 import SearchBar from '@/components/SearchBar';
 import { deleteProduct } from '@/services/productService';
-import { Loader } from 'lucide-react';
+import { Loader, AlertCircle, RefreshCw } from 'lucide-react';
 import { ITEMS_PER_PAGE } from '@/constants/config';
 
 export default function ProductCatalog() {
@@ -14,7 +14,27 @@ export default function ProductCatalog() {
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (error) return <p className="text-red-500 text-center">Failed to load products.</p>;
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-60">
+        <AlertCircle size={40} className="text-red-500 mb-2" />
+        <p className="text-lg font-semibold text-gray-800">Oops! Something went wrong.</p>
+        <p className="text-gray-600 text-center max-w-md">
+          We could not load the products. Please check your connection and try again.
+        </p>
+        <button
+          onClick={() => mutate()}
+          className="mt-4 flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          <RefreshCw size={18} />
+          Retry
+        </button>
+        <Link href="/add-product" className="mt-2 text-green-500 hover:underline">
+          Or add a new product
+        </Link>
+      </div>
+    );
+  }
 
   if (!products) {
     return (
